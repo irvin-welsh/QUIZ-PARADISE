@@ -9,10 +9,11 @@ quiz_capitals={
 }
 
 def geo_exam():
-    # get list of Q&A
-    questions=list(quiz_capitals.items())
+    student_name=input("Enter your name: ")
+    questions=list(quiz_capitals.items()) # get list of Q&A
     random.shuffle(questions)
     # set exam score to 0 (zero)
+    attempt=0
     exam_score=0
     mistakes=0
     # loop through questions
@@ -32,10 +33,16 @@ def geo_exam():
         print("You failed an exam!")
     else:
         print("Congratulations, you've passed an exam!")
-
+    attempt+=1
+    print(student_name,", you've made", attempt,"attempt(s) and got", exam_score, "points.")
 def main_menu():
     print("##################################\nWelcome to QUIZ PARADISE\n##################################\nPlease select an option:\n1. Take GEO Quiz\n2. Take MATH Quiz\n3. Quit\n##################################")
-    choice=int(input("Enter your choice: "))
+    try:
+        choice=int(input("Enter your choice: "))
+        pass
+    except (UnboundLocalError,ValueError):
+        print("Ooops! Your choice was wrong. Made another one")
+        choice=int(input("Enter your choice: "))
     if choice==1:
         print("Welcome to the GEO quiz. To pass you need to have 8 points or higher. 1 question = 1 point. Let's start")
         geo_exam()
