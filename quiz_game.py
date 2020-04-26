@@ -36,8 +36,19 @@ def geo_exam():
     attempt+=1
     print(student_name,", you've made", attempt,"attempt(s) and got", exam_score, "points.")
 
+def help_page():
+    print("\n\t=== Instruction on how to use QUIZ PARADISE ===\n* Each quiz has 10 questions dedicated to 1 scientific area;\n** Correct answer gives you 1 point;\n*** To successfully pass quiz you must earn 8 or more points;")
+    print("**** There is no time limits to finish quizes;\n***** To exit QUIZ PARADISE at any stage press Ctrl+C;\n\n")
+    go_to_menu=input("If you would like to continue to the main menu, type: menu or exit to quit the Master: ").lower()
+    if go_to_menu=="menu":
+        return main_menu()
+    elif go_to_menu=="exit":
+        quit("Shutting down Quiz Master. Bye!")
+    else:
+        quit("Wrong choice. Shutting down Quiz Master. Bye!")
+
 def main_menu():
-    print("\n##################################\nWelcome to QUIZ PARADISE\n##################################\nPlease select an option:\n1. Take GEO Quiz\n2. Take MATH Quiz\n3. Quit\n##################################")
+    print("\n##################################\nWelcome to QUIZ PARADISE\n##################################\nPlease select an option:\n1. Take GEO Quiz\n2. Take MATH Quiz\n3. Help page\n4. Quit\n##################################")
     try:
         choice=int(input("Enter your choice: "))
         pass
@@ -53,7 +64,9 @@ def main_menu():
         if choice2==1:
             print("Welcome to the GEO quiz. To pass you need to have 8 points or higher. 1 question = 1 point. Let's start")
             geo_exam()
-    elif choice in range(4,10):
+    elif choice==3:
+        return help_page()
+    elif choice in range(5,10):
         print("There is no such option. Would you like to make another choice?")
         choice3=input("Type yes to continue to Main Menu or no to quit: ").lower()
         if choice3=="yes":
