@@ -37,12 +37,12 @@ def geo_exam():
     print(student_name,", you've made", attempt,"attempt(s) and got", exam_score, "points.")
 
 def main_menu():
-    print("##################################\nWelcome to QUIZ PARADISE\n##################################\nPlease select an option:\n1. Take GEO Quiz\n2. Take MATH Quiz\n3. Quit\n##################################")
+    print("\n##################################\nWelcome to QUIZ PARADISE\n##################################\nPlease select an option:\n1. Take GEO Quiz\n2. Take MATH Quiz\n3. Quit\n##################################")
     try:
         choice=int(input("Enter your choice: "))
         pass
     except (UnboundLocalError,ValueError):
-        print("\nOoops! Your choice was wrong. Made another one \n\u2193 \u2193 \u2193 \n")
+        print("\nOoops! Your choice was wrong. Made another one \n\u2193 \u2193 \u2193")
         return main_menu()
     if choice==1:
         print("Welcome to the GEO quiz. To pass you need to have 8 points or higher. 1 question = 1 point. Let's start")
@@ -53,6 +53,13 @@ def main_menu():
         if choice2==1:
             print("Welcome to the GEO quiz. To pass you need to have 8 points or higher. 1 question = 1 point. Let's start")
             geo_exam()
+    elif choice in range(4,10):
+        print("There is no such option. Would you like to make another choice?")
+        choice3=input("Type yes to continue to Main Menu or no to quit: ").lower()
+        if choice3=="yes":
+            return main_menu()
         else:
             quit("Shutting down Quiz Master. Bye!")
+    else:
+        quit("Shutting down Quiz Master. Bye!")
 main_menu()
