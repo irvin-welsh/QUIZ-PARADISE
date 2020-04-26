@@ -35,14 +35,15 @@ def geo_exam():
         print("Congratulations, you've passed an exam!")
     attempt+=1
     print(student_name,", you've made", attempt,"attempt(s) and got", exam_score, "points.")
+
 def main_menu():
     print("##################################\nWelcome to QUIZ PARADISE\n##################################\nPlease select an option:\n1. Take GEO Quiz\n2. Take MATH Quiz\n3. Quit\n##################################")
     try:
         choice=int(input("Enter your choice: "))
         pass
     except (UnboundLocalError,ValueError):
-        print("Ooops! Your choice was wrong. Made another one")
-        choice=int(input("Enter your choice: "))
+        print("\nOoops! Your choice was wrong. Made another one \n\u2193 \u2193 \u2193 \n")
+        return main_menu()
     if choice==1:
         print("Welcome to the GEO quiz. To pass you need to have 8 points or higher. 1 question = 1 point. Let's start")
         geo_exam()
@@ -52,5 +53,6 @@ def main_menu():
         if choice2==1:
             print("Welcome to the GEO quiz. To pass you need to have 8 points or higher. 1 question = 1 point. Let's start")
             geo_exam()
-        else: quit()
+        else:
+            quit("Shutting down Quiz Master. Bye!")
 main_menu()
