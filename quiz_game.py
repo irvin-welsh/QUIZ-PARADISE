@@ -14,22 +14,12 @@ def geo_exam():
     student_name=input("Enter your name: ")
     questions=list(quiz_capitals.items()) # get list of Q&A
     random.shuffle(questions)
-<<<<<<< HEAD
     attempt=0
     exam_score=0 # set exam score to 0 (zero)
     mistakes=0
     # loop through questions
     for q in questions:
         print("\nWhat is the capital of",q[0])
-=======
-    # set exam score to 0 (zero)
-    attempt=0
-    exam_score=0
-    mistakes=0
-    # loop through questions
-    for q in questions:
-        print("What is the capital of",q[0])
->>>>>>> b0508eea1bc243797cc4e98a46975809b7cacd24
         # take user's input
         answer=input("Enter your answer: ")
         # check if input is correct
@@ -45,7 +35,6 @@ def geo_exam():
     else:
         print("Congratulations, you've passed an exam!")
     attempt+=1
-<<<<<<< HEAD
     print(student_name,"made", attempt,"attempt(s) and got", exam_score, "points.")
     results_file = PrettyTable()
     results_file.field_names = ["Student Name", "Attempts", "Exam Score"]
@@ -55,9 +44,6 @@ def geo_exam():
     results_file.write(str(attempt))
     results_file.write(str(exam_score))
     results_file.close()
-=======
-    print(student_name,", you've made", attempt,"attempt(s) and got", exam_score, "points.")
->>>>>>> b0508eea1bc243797cc4e98a46975809b7cacd24
 
 def help_page():
     print("\n\t=== Instruction on how to use QUIZ PARADISE ===\n* Each quiz has 10 questions dedicated to 1 scientific area;\n** Correct answer gives you 1 point;\n*** To successfully pass quiz you must earn 8 or more points;")
