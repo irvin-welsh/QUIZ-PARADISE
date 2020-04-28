@@ -1,11 +1,11 @@
 import random #randomize library
 
 quiz_capitals={
-    "What is the capital of USA?":"Washington", "What is the capital of UK?":"London",
-    "What is the capital of Russia?":"Moscow", "What is the capital of India?":"Delhi",
-    "What is the capital of China?":"Beijing", "What is the capital of South Korea?":"Seoul",
-    "What is the capital of Germany?":"Berlin", "What is the capital of Netherlands?":"Amsterdam",
-    "What is the capital of France?":"Paris", "What is the capital of Egypt?":"Cairo"
+    "USA?":"Washington", "UK?":"London",
+    "Russia?":"Moscow", "India?":"Delhi",
+    "China?":"Beijing", "South Korea?":"Seoul",
+    "Germany?":"Berlin", "Netherlands?":"Amsterdam",
+    "France?":"Paris", "Egypt?":"Cairo"
 }
 
 def geo_exam():
@@ -18,7 +18,7 @@ def geo_exam():
     mistakes=0
     # loop through questions
     for q in questions:
-        print(q[0])
+        print("What is the capital of",q[0])
         # take user's input
         answer=input("Enter your answer: ")
         # check if input is correct
