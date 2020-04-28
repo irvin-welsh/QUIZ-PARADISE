@@ -1,4 +1,6 @@
 import random #randomize library
+from prettytable import PrettyTable # library to create table-formatted results_file
+from prettytable import from_csv
 
 quiz_capitals={
     "USA?":"Washington", "UK?":"London",
@@ -12,13 +14,12 @@ def geo_exam():
     student_name=input("Enter your name: ")
     questions=list(quiz_capitals.items()) # get list of Q&A
     random.shuffle(questions)
-    # set exam score to 0 (zero)
     attempt=0
-    exam_score=0
+    exam_score=0 # set exam score to 0 (zero)
     mistakes=0
     # loop through questions
     for q in questions:
-        print("What is the capital of",q[0])
+        print("\nWhat is the capital of",q[0])
         # take user's input
         answer=input("Enter your answer: ")
         # check if input is correct
@@ -34,7 +35,15 @@ def geo_exam():
     else:
         print("Congratulations, you've passed an exam!")
     attempt+=1
-    print(student_name,", you've made", attempt,"attempt(s) and got", exam_score, "points.")
+    print(student_name,"made", attempt,"attempt(s) and got", exam_score, "points.")
+    results_file = PrettyTable()
+    results_file.field_names = ["Student Name", "Attempts", "Exam Score"]
+    results_file = open("results.csv", 'a')
+    # results_file.write('Student Name,'+'Attempts,'+'exam_score')
+    results_file.write(student_name)
+    results_file.write(str(attempt))
+    results_file.write(str(exam_score))
+    results_file.close()
 
 def help_page():
     print("\n\t=== Instruction on how to use QUIZ PARADISE ===\n* Each quiz has 10 questions dedicated to 1 scientific area;\n** Correct answer gives you 1 point;\n*** To successfully pass quiz you must earn 8 or more points;")
