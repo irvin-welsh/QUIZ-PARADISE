@@ -1,6 +1,5 @@
 import random #randomize library
-from prettytable import PrettyTable # library to create table-formatted results_file
-from prettytable import from_csv
+import sqlite3
 
 quiz_capitals={
     "USA?":"Washington", "UK?":"London",
@@ -10,40 +9,37 @@ quiz_capitals={
     "France?":"Paris", "Egypt?":"Cairo"
 }
 
+connection=sqlite3.connect("results.db")
+crsr = connection.cursor()
+
 def geo_exam():
-    student_name=input("Enter your name: ")
+    student_name=input("Enter your name: ").strip().capitalize()
     questions=list(quiz_capitals.items()) # get list of Q&A
     random.shuffle(questions)
-    attempt=0
     exam_score=0 # set exam score to 0 (zero)
     mistakes=0
     # loop through questions
     for q in questions:
         print("\nWhat is the capital of",q[0])
         # take user's input
-        answer=input("Enter your answer: ")
+        raw_answer=input("Enter your answer: ").strip()
+        answer=raw_answer.capitalize()
         # check if input is correct
         if answer==q[1]:
             print("Correct answer! You've got 1 point!")
             exam_score+=1        # update score for 1 per each correct answer
         else:
-            print("Incorrect")
-            mistakes+=1            # count mistakes if any
-    print("Your score:",exam_score, "Your mistakes:", mistakes)
+            print("Incorrect")   # count mistakes if any
+    print("\nYour score is:",exam_score)
     if exam_score<=7:
         print("You failed an exam!")
     else:
         print("Congratulations, you've passed an exam!")
-    attempt+=1
-    print(student_name,"made", attempt,"attempt(s) and got", exam_score, "points.")
-    results_file = PrettyTable()
-    results_file.field_names = ["Student Name", "Attempts", "Exam Score"]
-    results_file = open("results.csv", 'a')
-    # results_file.write('Student Name,'+'Attempts,'+'exam_score')
-    results_file.write(student_name)
-    results_file.write(str(attempt))
-    results_file.write(str(exam_score))
-    results_file.close()
+    mistakes=(len(quiz_capitals))-exam_score
+    print('\n',student_name,"made", mistakes,"mistake(s) and got", exam_score, "points.")
+    global final
+    final=[student_name,mistakes,exam_score]
+    return final
 
 def help_page():
     print("\n\t=== Instruction on how to use QUIZ PARADISE ===\n* Each quiz has 10 questions dedicated to 1 scientific area;\n** Correct answer gives you 1 point;\n*** To successfully pass quiz you must earn 8 or more points;")
@@ -84,4 +80,24 @@ def main_menu():
             quit("Shutting down Quiz Master. Bye!")
     else:
         quit("Shutting down Quiz Master. Bye!")
+
+def geo_exam_params():
+    geo_exam_params=tuple(final)
+    return geo_exam_params
+
+def addingToDB():
+    crsr.execute('''CREATE TABLE IF NOT EXISTS geo_results (student_name TEXT,mistakes INTEGER,exam_score INTEGER);''')
+    crsr.execute('INSERT INTO geo_results VALUES (?,?,?)', geo_exam_params())
+    connection.commit()
+
+def getDataFromDB():
+    for rows in connection.execute('SELECT * FROM geo_results'):
+        fetched = [rows]
+    print("You final results have been successfully added to the database")
+
 main_menu()
+# geo_exam()
+geo_exam_params()
+addingToDB()
+getDataFromDB()
+connection.close()
