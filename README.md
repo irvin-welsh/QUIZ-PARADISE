@@ -3,11 +3,11 @@ Console app to pass quizes. Mostly, for school students.
 Adding new quizes and improvements constantly
 
 Project's backlog:
-25 April - GEO quiz first time released
-26 April - added functionality to store results in a form of "txt" file
-27 April - added Main Menu functionality and Help page
-30 April - added sqlite3 to the project. Now, results are stored in DB (locally)
-1 May - improved Main Menu functionality using case..switch logic (actually, done with dictionaries because no case..switch in python)
+1. - GEO quiz first time released
+2. - added functionality to store results in a form of "txt" file
+3. - added Main Menu functionality and Help page
+4. - added sqlite3 to the project. Now, results are stored in DB (locally)
+5.  - improved Main Menu functionality using case..switch logic (actually, done with dictionaries because no case..switch in python)
 .....
 .....
 Further plans:
