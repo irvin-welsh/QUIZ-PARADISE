@@ -1,16 +1,15 @@
 import random #randomize library
 import sqlite3
 
-quiz_capitals={
-    "USA?":"Washington", "UK?":"London",
-    "Russia?":"Moscow", "India?":"Delhi",
-    "China?":"Beijing", "South Korea?":"Seoul",
-    "Germany?":"Berlin", "Netherlands?":"Amsterdam",
-    "France?":"Paris", "Egypt?":"Cairo"
-}
-
 connection=sqlite3.connect("results.db")
 crsr = connection.cursor()
+
+def getDataFromDB():
+    for rows in crsr.execute('SELECT * FROM Country_Capitals'):
+        cc_rows=crsr.fetchall()
+    global quiz_capitals
+    quiz_capitals=dict(cc_rows)
+    return quiz_capitals
 
 def menuDict():
     printMenu()
@@ -59,13 +58,13 @@ def helpg():
 
 def geo_exam():
     student_name=input("Enter your name: ").strip().capitalize()
-    questions=list(quiz_capitals.items()) # get list of Q&A
-    random.shuffle(questions)
+    question=list(quiz_capitals.items()) # get list of Q&A
+    questions=random.sample(question,10)
     exam_score=0 # set exam score to 0 (zero)
     mistakes=0
     # loop through questions
     for q in questions:
-        print("\nWhat is the capital of",q[0])
+        print("\nWhat is the capital of",q[0]+'?')
         # get user's input
         raw_answer=input("Enter your answer: ").strip()
         answer=raw_answer.capitalize()
@@ -75,13 +74,13 @@ def geo_exam():
             exam_score+=1        # update score for 1 per each correct answer
         else:
             print("Incorrect")   # count mistakes if any
-    print("\nYour score is:",exam_score)
+        # print("Your score is:",exam_score)
     if exam_score<=7:
-        print("You failed an exam!")
+        print("\nYou failed an exam!")
     else:
-        print("Congratulations, you've passed an exam!")
-    mistakes=(len(quiz_capitals))-exam_score
-    print('\n',student_name,"made", mistakes,"mistake(s) and got", exam_score, "points.")
+        print("\nCongratulations, you've passed an exam!")
+    mistakes=(len(questions))-exam_score
+    print('\n',student_name,"made", mistakes,"mistake(s) and got", exam_score, "point(s).")
     global final
     final=[student_name,mistakes,exam_score]
     return final
@@ -95,13 +94,8 @@ def addingToDB():
     crsr.execute('INSERT INTO geo_results VALUES (?,?,?)', geo_exam_params())
     connection.commit()
 
-def getDataFromDB():
-    for rows in connection.execute('SELECT * FROM geo_results'):
-        fetched = [rows]
-    print("You final results have been successfully added to the database")
-
+getDataFromDB()
 menuDict()
 geo_exam_params()
 addingToDB()
-getDataFromDB()
 connection.close()
