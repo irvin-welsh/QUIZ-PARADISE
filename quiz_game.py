@@ -1,5 +1,6 @@
 import random #randomize library
 import sqlite3
+import math_quiz as math
 
 connection=sqlite3.connect("results.db")
 crsr = connection.cursor()
@@ -23,8 +24,29 @@ def menuDict():
         exit()
     elif choice==1:
         geo_exam()
+        geo_exam_params()
+        addingToDB()
+        connection.close()
+        print("You've done with Geo Quiz.")
+        a=input('Type MENU to go to the main menu or EXIT to close Quiz Master: ').strip().upper()
+        if a=='MENU':
+            menuDict()
+        elif a=='EXIT':
+            exit()
+        else:
+            print('Invalid selection. Try again\n')
+            exit()
     elif choice==2:
-        mathQuiz()
+        math.game_init()
+        print("You've done with Math Quiz.")
+        a=input('Type MENU to go to the main menu or EXIT to close Quiz Master: ').strip().upper()
+        if a=='MENU':
+            menuDict()
+        elif a=='EXIT':
+            exit()
+        else:
+            print('Invalid selection. Try again\n')
+            exit()
     elif choice==3:
         helpg()
     else:
@@ -42,19 +64,15 @@ def printMenu():
 def exit():
     quit("Shutting down Quiz Master. Bye!")
 
-def mathQuiz():
-    print("\nIt's not ready yet. Choose another option.")
-    menuDict()
-
 def helpg():
     delimiter=100*'#'
     rules='\t=== Instruction on how to use QUIZ PARADISE ===\n* Each quiz has 10 questions dedicated to 1 scientific area;\n** Correct answer gives you 1 point;\n*** To successfully pass quiz you must earn 8 or more points;\n**** There is no time limits to finish quizes;\n***** To exit QUIZ PARADISE at any stage press Ctrl+C;'
     print(delimiter+'\n'+rules+'\n'+delimiter)
-    back_to_menu=input("If you would like to continue to the main menu, type: MENU or EXIT to quit the Master: ").lower()
+    back_to_menu=input("If you would like to continue to the main menu, type: MENU or EXIT to quit the Master: ").strip().lower()
     if back_to_menu=='menu':
         menuDict()
     else:
-        quit("Shutting down Quiz Master. Bye!")
+        exit()
 
 def geo_exam():
     student_name=input("Enter your name: ").strip().capitalize()
@@ -96,6 +114,3 @@ def addingToDB():
 
 getDataFromDB()
 menuDict()
-geo_exam_params()
-addingToDB()
-connection.close()

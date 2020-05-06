@@ -20,11 +20,12 @@ def math_exam():
     question=random.sample(questions,10)
     mistakes=0
     math_score=0
+    user_answer=''
     for q in question:
         print('\nEvaluate the following expression:',q[0])
         try:
-            user_answer=int(input('Type your answer here: '))
             if user_answer is not int:
+                user_answer=int(input('Type your answer here: '))
                 raise TypeError("Only integers are allowed")
         except:
             if user_answer==q[1]:
@@ -47,9 +48,11 @@ def get_math_params():
     print(math_params)
     return math_params
 
-assemble_question()
-math_exam()
-crsr.execute('''CREATE TABLE IF NOT EXISTS math_results (student_name TEXT,mistakes INTEGER,exam_score INTEGER)''')
-crsr.execute('INSERT INTO math_results VALUES (?,?,?)', get_math_params())
-connection.commit()
-connection.close()
+
+def game_init():
+    assemble_question()
+    math_exam()
+    crsr.execute('''CREATE TABLE IF NOT EXISTS math_results (student_name TEXT,mistakes INTEGER,exam_score INTEGER)''')
+    crsr.execute('INSERT INTO math_results VALUES (?,?,?)', get_math_params())
+    connection.commit()
+    connection.close()
