@@ -47,19 +47,9 @@ def get_math_params():
     print(math_params)
     return math_params
 
-def addingToDB():
-    crsr.execute('''CREATE TABLE IF NOT EXISTS math_results (student_name TEXT,mistakes INTEGER,exam_score INTEGER);''')
-    crsr.execute('INSERT INTO geo_results VALUES (?,?,?)', get_math_params())
-    connection.commit()
-
 assemble_question()
 math_exam()
-addingToDB()
+crsr.execute('''CREATE TABLE IF NOT EXISTS math_results (student_name TEXT,mistakes INTEGER,exam_score INTEGER)''')
+crsr.execute('INSERT INTO math_results VALUES (?,?,?)', get_math_params())
+connection.commit()
 connection.close()
-    # results_file = PrettyTable()
-    # results_file.field_names = ["Student Name", "Attempts", "Exam Score"]
-    # results_file = open("math.results.txt", 'a')
-    # # results_file.write('Student Name,'+'Attempts,'+'exam_score')
-    # results_file.write('Student Name : Attempts : Math Score\n')
-    # results_file.write(str(student_name)+' : '+str(mistakes)+' : '+str(math_score)+'\n')
-    # results_file.close()
