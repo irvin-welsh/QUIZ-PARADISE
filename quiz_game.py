@@ -107,10 +107,12 @@ def geo_exam_params():
     geo_exam_params=tuple(final)
     return geo_exam_params
 
+
 def addingToDB():
     crsr.execute('''CREATE TABLE IF NOT EXISTS geo_results (student_name TEXT,mistakes INTEGER,exam_score INTEGER);''')
     crsr.execute('INSERT INTO geo_results VALUES (?,?,?)', geo_exam_params())
     connection.commit()
+
 
 getDataFromDB()
 menuDict()
