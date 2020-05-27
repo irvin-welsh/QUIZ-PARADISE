@@ -5,6 +5,7 @@ math_questions={}
 connection=sqlite3.connect("results.db")
 crsr = connection.cursor()
 
+
 def assemble_question():
     for i in range(1,12):
         operators=['+','-','**','%','*']
