@@ -12,7 +12,6 @@ driver = webdriver.Chrome('/bin/chromedriver')  # initialize webdriver
 driver.get(URL) # recieve target webpage, using selenium
 time.sleep(2) # imitates real user :)
 
-
 def getAllXpaths():           # function receives all pointers (xpath(-es)) to our target data and adds up to the xpaths[] list
     for li_i in range(1,197):   # hardcoded range determined with chrome developer tools
         xpath = "/html/body/main/article/div[4]/div[1]/div[7]/ol/li[{}]".format(li_i)
