@@ -12,8 +12,6 @@ def getDataFromDB():
     quiz_capitals=dict(cc_rows)
     return quiz_capitals
 
-
-
 def menuDict():
     printMenu()
     try:
