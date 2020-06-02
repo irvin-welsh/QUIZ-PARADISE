@@ -43,12 +43,10 @@ def math_exam():
     final=[student_name,mistakes,math_score]
     # return final
 
-
 def get_math_params():
     math_params=tuple(final)
     print(math_params)
     return math_params
-
 
 def game_init():
     assemble_question()
