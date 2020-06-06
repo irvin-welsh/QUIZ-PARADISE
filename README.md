@@ -9,7 +9,7 @@ Project's backlog:
 4. - added sqlite3 to the project. Now, results are stored in DB (locally)
 5. - improved Main Menu functionality using case..switch logic (actually, done with dictionaries because no case..switch in python)
 6. - added parser to get all country:capital pairs and insert it to the table in DB. Parser must be used only once and then data retreived locally form DB.
-7. - added Math quiz with randomly generated questions
+7. - added Math quiz with randomly generated questions (added)
 
 #############################################################################################
 
