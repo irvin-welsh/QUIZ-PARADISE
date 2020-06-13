@@ -112,5 +112,6 @@ def addingToDB():
     crsr.execute('INSERT INTO geo_results VALUES (?,?,?)', geo_exam_params())
     connection.commit()
 
+    
 getDataFromDB()
 menuDict()
