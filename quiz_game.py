@@ -5,7 +5,6 @@ import math_quiz as math
 connection=sqlite3.connect("results.db")
 crsr = connection.cursor()
 
-
 def getDataFromDB():
     for rows in crsr.execute('SELECT * FROM Country_Capitals'):
         cc_rows=crsr.fetchall()
